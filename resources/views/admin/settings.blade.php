@@ -1,0 +1,1 @@
+<x-layout title="Tetapan Pentadbir" admin><section class="page-wrap"><div class="page-heading"><span class="eyebrow">PUSAT KAWALAN · KEUTAMAAN ANDA</span><h1>Tetapan Pentadbir</h1><p>Urus paparan, animasi dan keselamatan akaun anda.</p></div><livewire:admin-settings/></section></x-layout>

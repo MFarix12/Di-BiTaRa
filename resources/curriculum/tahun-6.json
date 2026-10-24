@@ -1,0 +1,138 @@
+{
+  "tf": [
+    [
+      "diperbaharui",
+      "di jalankan",
+      "diselenggarakan",
+      "di persembahkan",
+      "dipertandingkan",
+      "di selesaikan"
+    ],
+    [
+      "di antara dua bangunan",
+      "dikawasan sekolah",
+      "di hujung jalan",
+      "disamping perpustakaan",
+      "di dalam bilik mesyuarat",
+      "dibelakang dewan"
+    ]
+  ],
+  "drag": [
+    "dilaksanakan",
+    "di antara",
+    "dipertandingkan",
+    "di dalam",
+    "disediakan",
+    "di belakang",
+    "diperiksa",
+    "di kawasan sekolah",
+    "disampaikan",
+    "di hujung jalan"
+  ],
+  "order": [
+    [
+      [
+        "oleh pihak sekolah",
+        "program itu",
+        "telah dilaksanakan",
+        "pada minggu lalu."
+      ],
+      [
+        2,
+        3,
+        1,
+        4
+      ],
+      "Program itu telah dilaksanakan oleh pihak sekolah pada minggu lalu."
+    ],
+    [
+      [
+        "di dewan utama.",
+        "sedang berlangsung",
+        "Pertandingan pidato",
+        "sekolah"
+      ],
+      [
+        3,
+        4,
+        2,
+        1
+      ],
+      "Pertandingan pidato sekolah sedang berlangsung di dewan utama."
+    ],
+    [
+      [
+        "disampaikan",
+        "oleh guru besar",
+        "Hadiah kemenangan",
+        "kepada para pemenang."
+      ],
+      [
+        3,
+        1,
+        2,
+        4
+      ],
+      "Hadiah kemenangan disampaikan oleh guru besar kepada para pemenang."
+    ],
+    [
+      [
+        "di kawasan sekolah.",
+        "ditanam",
+        "Pokok-pokok bunga",
+        "secara bergotong-royong"
+      ],
+      [
+        3,
+        2,
+        4,
+        1
+      ],
+      "Pokok-pokok bunga ditanam secara bergotong-royong di kawasan sekolah."
+    ],
+    [
+      [
+        "Sediakan payung",
+        "sebelum hujan."
+      ],
+      [
+        1,
+        2
+      ],
+      "Sediakan payung sebelum hujan.",
+      "Bersedia lebih awal sebelum sesuatu kesukaran berlaku."
+    ]
+  ],
+  "fill": [
+    [
+      "Majlis itu ________ (adakan) di dewan utama sekolah.",
+      "diadakan",
+      "Majlis itu diadakan di dewan utama sekolah."
+    ],
+    [
+      "Para peserta sedang menunggu ________ (hadapan) bilik pertandingan.",
+      "di hadapan",
+      "Para peserta sedang menunggu di hadapan bilik pertandingan."
+    ],
+    [
+      "Semua borang penyertaan telah ________ (semak) oleh guru.",
+      "disemak",
+      "Semua borang penyertaan telah disemak oleh guru."
+    ],
+    [
+      "Buku rujukan itu boleh didapati ________ (perpustakaan) sekolah.",
+      "di perpustakaan",
+      "Buku rujukan itu boleh didapati di perpustakaan sekolah."
+    ],
+    [
+      "Keputusan pertandingan akan ________ (umum) selepas waktu rehat.",
+      "diumumkan",
+      "Keputusan pertandingan akan diumumkan selepas waktu rehat."
+    ]
+  ],
+  "imlak": [
+    "Semua tugasan telah disemak oleh guru di dalam bilik darjah.",
+    "Pertandingan itu diadakan di dewan utama sekolah.",
+    "Sediakan payung sebelum hujan."
+  ]
+}

@@ -1,0 +1,1 @@
+<x-layout title="Profil Pentadbir" :admin="true"><section class="page-wrap"><div class="page-heading"><span class="eyebrow">PAPAN PEMUKA · AKAUN PENTADBIR</span><h1>Profil Pentadbir</h1><p>Lihat dan kemas kini maklumat asas Pentadbir.</p></div><livewire:admin-profile/></section></x-layout>

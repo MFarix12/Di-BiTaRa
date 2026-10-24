@@ -1,0 +1,138 @@
+{
+  "tf": [
+    [
+      "disusun",
+      "di hias",
+      "dipamerkan",
+      "di pilih",
+      "dibungkus",
+      "di cat"
+    ],
+    [
+      "di perpustakaan",
+      "dikelas",
+      "di gelanggang",
+      "dimakmal",
+      "di hadapan rumah",
+      "disebelah kantin"
+    ]
+  ],
+  "drag": [
+    "dipamerkan",
+    "di perpustakaan",
+    "disimpan",
+    "di gelanggang",
+    "dibersihkan",
+    "di halaman",
+    "dibawa",
+    "di makmal",
+    "dihias",
+    "di dalam kelas"
+  ],
+  "order": [
+    [
+      [
+        "di perpustakaan.",
+        "membaca",
+        "Murid-murid",
+        "buku"
+      ],
+      [
+        3,
+        2,
+        4,
+        1
+      ],
+      "Murid-murid membaca buku di perpustakaan."
+    ],
+    [
+      [
+        "oleh guru.",
+        "diperiksa",
+        "Latihan",
+        "itu"
+      ],
+      [
+        3,
+        4,
+        2,
+        1
+      ],
+      "Latihan itu diperiksa oleh guru."
+    ],
+    [
+      [
+        "di padang.",
+        "sedang bermain",
+        "bola sepak",
+        "Mereka"
+      ],
+      [
+        4,
+        2,
+        3,
+        1
+      ],
+      "Mereka sedang bermain bola sepak di padang."
+    ],
+    [
+      [
+        "disusun",
+        "dengan kemas",
+        "Buku-buku",
+        "di rak."
+      ],
+      [
+        3,
+        1,
+        2,
+        4
+      ],
+      "Buku-buku disusun dengan kemas di rak."
+    ],
+    [
+      [
+        "Berat sama dipikul",
+        "ringan sama dijinjing."
+      ],
+      [
+        1,
+        2
+      ],
+      "Berat sama dipikul, ringan sama dijinjing.",
+      "Susah dan senang dihadapi bersama-sama."
+    ]
+  ],
+  "fill": [
+    [
+      "Buku-buku itu ________ (susun) dengan kemas di rak.",
+      "disusun",
+      "Buku-buku itu disusun dengan kemas di rak."
+    ],
+    [
+      "Kami menunggu guru ________ (hadapan) kelas.",
+      "di hadapan",
+      "Kami menunggu guru di hadapan kelas."
+    ],
+    [
+      "Poster itu ________ (tampal) pada papan kenyataan.",
+      "ditampal",
+      "Poster itu ditampal pada papan kenyataan."
+    ],
+    [
+      "Murid-murid berkumpul ________ (dewan) sebelum perhimpunan.",
+      "di dewan",
+      "Murid-murid berkumpul di dewan sebelum perhimpunan."
+    ],
+    [
+      "Hadiah itu ________ (bungkus) dengan kertas berwarna biru.",
+      "dibungkus",
+      "Hadiah itu dibungkus dengan kertas berwarna biru."
+    ]
+  ],
+  "imlak": [
+    "Buku itu disusun di atas meja.",
+    "Murid-murid berkumpul di dewan sekolah.",
+    "Berat sama dipikul, ringan sama dijinjing."
+  ]
+}

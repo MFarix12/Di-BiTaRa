@@ -1,0 +1,1 @@
+<x-layout title="Tindakan tidak tersedia"><section class="page-wrap empty-state"><span aria-hidden="true">✈</span><h1>Tindakan tidak tersedia</h1><p>Buka halaman semula dan cuba lagi.</p><a class="btn btn-primary" href="{{ route('home') }}">Kembali ke Utama</a></section></x-layout>

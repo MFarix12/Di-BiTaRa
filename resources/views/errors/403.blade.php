@@ -1,0 +1,1 @@
+<x-layout title="Akses Ditolak"><section class="page-wrap empty-state"><span>⌁</span><h1>Halaman ini tidak boleh diakses.</h1><p>Anda tidak mempunyai akses ke halaman ini.</p><a href="{{ route('home') }}" class="btn btn-primary">Kembali ke Utama</a></section></x-layout>

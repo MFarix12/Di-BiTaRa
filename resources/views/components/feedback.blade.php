@@ -1,0 +1,3 @@
+@if(session('status'))<div class="notice success" role="status">✓ {{ session('status') }}</div>@endif
+@if(session('recovery_code'))<div class="notice recovery" role="status"><strong>Simpan kod pemulihan anda</strong><p>Kod ini dipaparkan sekali sahaja. Simpan di tempat selamat bersama penjaga anda.</p><code>{{ session('recovery_code') }}</code></div>@endif
+@if($errors->any())<div class="notice error" role="alert"><img class="pupil-message-avatar" src="{{ asset('images/pilot-mascot.png') }}" alt="" width="40" height="50"><strong>Jom semak sekali lagi.</strong><ul>@foreach($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul></div>@endif

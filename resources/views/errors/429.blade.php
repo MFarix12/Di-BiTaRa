@@ -1,0 +1,1 @@
+<x-layout title="Terlalu Banyak Cubaan"><section class="page-wrap empty-state"><span>⌁</span><h1>Berehat sebentar, juruterbang.</h1><p>Terlalu banyak cubaan dibuat. Sila cuba lagi selepas sebentar.</p><a href="{{ route('home') }}" class="btn btn-primary">Kembali ke Utama</a></section></x-layout>
