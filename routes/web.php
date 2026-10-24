@@ -28,7 +28,7 @@ Route::get('/papan-pemuka', function () {
     return redirect()->route('student.dashboard');
 })->middleware(['auth','auth.session'])->name('dashboard');
 
-Route::middleware([\App\Http\Middleware\RequireLearnerSession::class, \App\Http\Middleware\PrivateStudentPages::class])->group(function () {
+Route::middleware([\App\Http\Middleware\RequireLearnerSession::class, \App\Http\Middleware\PrivateStudentPages::class, \App\Http\Middleware\PersistentLearnerShell::class])->group(function () {
     Route::get('/maklumat-pelajar',[\App\Http\Controllers\AccessSessionController::class,'details'])->name('student.details');
     Route::post('/maklumat-pelajar',[\App\Http\Controllers\AccessSessionController::class,'saveDetails'])->block(10,10)->name('student.details.save');
     Route::get('/tutorial', fn () => redirect()->route('student.profile',['tutorial'=>1]))->name('tutorial');
@@ -89,6 +89,10 @@ Route::prefix('admin')->name('admin.')->middleware(['auth:web', 'auth.session', 
     Route::put('/kod-akses/{code}',[\App\Http\Controllers\AccessCodeController::class,'save'])->whereNumber('code')->name('codes.update');
     Route::get('/sesi/muat-turun/{format}',[\App\Http\Controllers\AccessCodeController::class,'export'])->whereIn('format',['xlsx','pdf'])->name('sessions.export');
     Route::get('/sesi',[\App\Http\Controllers\AccessCodeController::class,'results'])->name('sessions');
+    Route::post('/sesi/sijil/zip',[\App\Http\Controllers\AdminCertificateController::class,'bundle'])->name('certificates.bundle');
+    Route::get('/sijil-pelajar/{certificate}',[\App\Http\Controllers\AdminCertificateController::class,'preview'])->whereNumber('certificate')->name('certificates.preview');
+    Route::get('/sijil-pelajar/{certificate}/pdf',[\App\Http\Controllers\AdminCertificateController::class,'pdf'])->whereNumber('certificate')->name('certificates.file');
+    Route::get('/sijil-pelajar/{certificate}/muat-turun',[\App\Http\Controllers\AdminCertificateController::class,'pdf'])->whereNumber('certificate')->name('certificates.download');
     Route::get('/studio/{module}',[\App\Http\Controllers\StudioController::class,'index'])->name('studio.index');
     Route::get('/studio/{module}/baharu',[\App\Http\Controllers\StudioController::class,'form'])->name('studio.create');
     Route::post('/studio/{module}',[\App\Http\Controllers\StudioController::class,'save'])->name('studio.store');
@@ -108,7 +112,6 @@ Route::prefix('admin')->name('admin.')->middleware(['auth:web', 'auth.session', 
         DB::transaction(function()use($user){$row=DB::table('users')->where('role','pelajar')->whereNull('deleted_at')->lockForUpdate()->find($user);abort_unless($row,404);$status=$row->status==='active'?'inactive':'active';DB::table('users')->where('id',$user)->update(['status'=>$status,'updated_at'=>now()]);\App\Services\Audit::record('status','users',$user,['status'=>$status]);});
         return back()->with('status','Status Pelajar dikemas kini.');
     })->whereNumber('user')->name('user.status');
-    Route::get('/laporan',fn()=>view('admin.reports',['journeys'=>DB::table('student_journeys')->leftJoin('users','users.id','=','student_journeys.user_id')->leftJoin('learner_sessions','learner_sessions.id','=','student_journeys.learner_session_id')->select('student_journeys.*')->selectRaw("COALESCE(learner_sessions.display_name,users.display_name) as display_name")->latest('student_journeys.id')->paginate(15,['*'],'perjalanan'),'progress'=>DB::table('student_progress')->join('student_journeys','student_journeys.id','=','student_progress.student_journey_id')->leftJoin('users','users.id','=','student_journeys.user_id')->leftJoin('learner_sessions','learner_sessions.id','=','student_journeys.learner_session_id')->join('zones','zones.id','=','student_progress.zone_id')->select('student_progress.*','zones.name')->selectRaw("COALESCE(learner_sessions.display_name,users.display_name) as display_name")->orderBy('users.id')->paginate(30)]))->name('reports');
     Route::get('/pratonton/zon-3', [\App\Http\Controllers\StudioController::class,'zonePreview'])->name('zone3.preview');
     Route::get('/audit', fn () => view('admin.audit', ['logs' => DB::table('audit_logs')->leftJoin('users','users.id','=','audit_logs.admin_user_id')->select('audit_logs.*','users.display_name')->orderByDesc('audit_logs.id')->paginate(20)]))->name('audit');
 });

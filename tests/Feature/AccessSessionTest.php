@@ -141,7 +141,7 @@ class AccessSessionTest extends TestCase
         $code=DB::table('access_codes')->latest('id')->first();$this->assertStringStartsWith('DBR-',$code->code);
         $this->put(route('admin.codes.update',$code->id),['name'=>'Sesi Baharu','status'=>'inactive','expires_at'=>'2026-12-31T14:00'])->assertRedirect();
         $this->assertDatabaseHas('access_codes',['id'=>$code->id,'status'=>'inactive','expires_at'=>'2026-12-31 06:00:00']);
-        $this->get(route('admin.sessions'))->assertOk();$this->get(route('admin.reports'))->assertOk();
+        $this->get(route('admin.sessions'))->assertOk();$this->get('/admin/laporan')->assertNotFound();
         $this->assertDatabaseHas('audit_logs',['entity_type'=>'access_codes','entity_id'=>$code->id,'action'=>'update']);
     }
 

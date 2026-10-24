@@ -71,9 +71,9 @@ Artisan::command('dibitara:personalize-certificates',function(){
  foreach(DB::table('certificates')->where('status','ready')->whereNotNull('media_file_id')->get() as $cert){
   $j=DB::table('student_journeys')->find($cert->student_journey_id);if(!$j || !$j->learner_session_id)continue;
   $s=\App\Models\LearnerSession::find($j->learner_session_id);$m=DB::table('media_files')->find($cert->media_file_id);if(!$s || !$m || !in_array($m->disk,['private','local']))continue;
-  $disk=\Illuminate\Support\Facades\Storage::disk($m->disk);if(!$disk->exists($m->path) || str_contains($disk->get($m->path),'/DiBITaRaSessionV2'))continue;
+  $disk=\Illuminate\Support\Facades\Storage::disk($m->disk);if(!$disk->exists($m->path) || str_contains($disk->get($m->path),'/DiBITaRaSessionV3'))continue;
   $pdf=app(\App\Services\CertificatePdf::class)->generate($cert->recipient_name,$cert->certificate_number,\Carbon\Carbon::parse($cert->issued_at)->timezone('Asia/Kuala_Lumpur')->format('d/m/Y'),['year'=>$s->school_year,'class'=>$s->class_name??'—','seconds'=>$j->total_duration_seconds??0]);
-  $path='certificates/session-v2/'.$cert->id.'.pdf';if(!$disk->put($path,$pdf))throw new \RuntimeException('Sijil gagal disimpan; fail asal dikekalkan.');
+  $path='certificates/session-v3/'.$cert->id.'.pdf';if(!$disk->put($path,$pdf))throw new \RuntimeException('Sijil gagal disimpan; fail asal dikekalkan.');
   DB::table('media_files')->where('id',$m->id)->update(['path'=>$path,'size_bytes'=>strlen($pdf),'checksum'=>hash('sha256',$pdf)]);$n++;
  }
  $this->info($n.' sijil diselaraskan; nombor, tarikh, markah dan cap asal dikekalkan.');

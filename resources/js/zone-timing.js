@@ -19,9 +19,14 @@ if (countdown) {
     countdown.addEventListener('cancel', event => event.preventDefault());
     const began = performance.now();
     let sent = false;
+    let lastSound = null;
     const tick = () => {
         const remaining = Math.max(0, seconds - Math.floor((performance.now() - began) / 1000));
         const label = remaining ? String(remaining) : 'Mula';
+        if (seconds > 0 && lastSound !== remaining) {
+            lastSound = remaining;
+            window.dispatchEvent(new CustomEvent('dibitara:countdown', {detail:{remaining}}));
+        }
         if (number.textContent !== label) {
             number.textContent = label;
             number.classList.remove('countdown-pop');

@@ -127,7 +127,7 @@ class ContinuousAdventureTest extends TestCase
         $this->get('/kuiz-aktiviti')->assertOk()->assertSee('Mari Meneroka');
         $this->get(route('student.zone.launch',2))->assertForbidden();
         Livewire::actingAs($this->student,'learner')->test(DeparturePreparation::class)->set('avatar_id',DB::table('avatars')->value('id'))->call('confirm')->assertRedirect(route('student.transition',1));
-        $this->get(route('student.transition',1))->assertOk()->assertSee('data-adventure-transition',false);
+        $this->get(route('student.transition',1))->assertOk()->assertSee('data-adventure-transition',false)->assertSee('departure-aircraft',false)->assertDontSee('Teruskan ke Zon');
         $this->get('/kuiz-aktiviti?zon=2')->assertRedirect(route('student.note',['sequence'=>2,'note'=>$this->engine->zone($j,2)['notes'][0]['id']]));
         $this->get(route('student.zone.launch',1))->assertForbidden();
         $this->openThree();
@@ -148,7 +148,7 @@ class ContinuousAdventureTest extends TestCase
         $this->assertDatabaseCount('passport_stamps',5);$this->assertDatabaseCount('certificates',1);
         $this->get('/pasport-pencapaian')->assertOk()->assertSee('Betul Cubaan Pertama')->assertSee('Ulang Kaji');
         $before=['attempts'=>DB::table('attempts')->get()->toJson(),'responses'=>DB::table('responses')->get()->toJson(),'submissions'=>DB::table('answer_submissions')->get()->toJson(),'clock'=>DB::table('journey_clocks')->get()->toJson(),'certificates'=>DB::table('certificates')->get()->toJson()];
-        $this->get(route('student.review'))->assertOk()->assertSee('Jom Ulang Kaji');
+        $this->get(route('student.review'))->assertOk()->assertSee('Jom ulang kaji apa yang telah anda pelajari!')->assertSee('Nota Pembelajaran')->assertSee('Dengar &amp; Cuba', false);
         $activity=$this->engine->zone($j,5)['activities'][0];$raw=$activity['questions'][0];
         $this->get(route('student.review.activity',$activity['id']))->assertOk()->assertSee('Mod Ulang Kaji')->assertDontSee('data-journey-clock',false);
         $this->post(route('student.review.activity',$activity['id']),['answer'=>$raw['answer']['value']])->assertRedirect();
@@ -201,7 +201,7 @@ class ContinuousAdventureTest extends TestCase
         $this->assertSame(10,DB::table('attempts')->find($id)->score);
         $this->postJson(route('student.draft',$id),['question_id'=>$q->id,'answer'=>'salah'])->assertForbidden();
         $this->actingAs($this->makeLearner(),'learner');$this->postJson(route('student.draft',$id),['question_id'=>$future->id,'answer'=>'betul'])->assertNotFound();
-        $this->actingAs($this->admin,'web')->get(route('admin.reports'))->assertOk()->assertSee('Markah Cubaan Pertama')->assertDontSee('<th>Bantuan</th>',false);
+        $this->actingAs($this->admin,'web')->get(route('admin.sessions'))->assertOk()->assertSee('Betul Cubaan Pertama')->assertDontSee('admin/laporan');
     }
 
     public function test_three_listens_are_strict_and_survive_reload_and_wrong_answers(): void

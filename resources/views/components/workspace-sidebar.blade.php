@@ -4,7 +4,7 @@
         ['admin.dashboard','▦','Papan Pemuka'], ['admin.contents','▤','Kandungan'], ['admin.notes','▣','Nota'],
         ['admin.quizzes','✈','Kuiz & Aktiviti'], ['admin.questions','?','Soalan & Jawapan'], ['admin.instructions','☷','Arahan'],
         ['admin.audio','♫','Audio'], ['admin.media','▧','Media'], ['admin.zone3.preview','▷','Pratonton Pelajar'],
-        ['admin.codes','🎫','Kod Akses'], ['admin.sessions','♙','Keputusan / Sesi'], ['admin.reports','▥','Laporan'], ['admin.audit','◷','Log Audit'],
+        ['admin.codes','🎫','Kod Akses'], ['admin.sessions','♙','Keputusan / Sesi'], ['admin.audit','◷','Log Audit'],
     ] : [];
 @endphp
 <aside id="workspace-sidebar" class="workspace-sidebar {{ $isAdmin ? 'is-admin' : 'is-student' }}" :class="{'drawer-open':sidebarOpen}" aria-label="{{ $isAdmin ? 'Navigasi Pentadbir' : 'Navigasi Pelajar' }}">

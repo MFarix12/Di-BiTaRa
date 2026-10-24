@@ -21,7 +21,7 @@ class NavigationAndAdminLoginTest extends TestCase
         libxml_use_internal_errors($previous);
         $xpath = new \DOMXPath($document);
         $links = $xpath->query('//nav[@id="sidebar-menu"]/a');
-        $this->assertCount(13, $links);
+        $this->assertCount(12, $links);
         foreach ($links as $link) {
             $this->assertNotContains(trim($link->getAttribute('title')), ['Profil', 'Tetapan', 'Log Keluar']);
         }

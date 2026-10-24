@@ -11,7 +11,6 @@
 'admin.zone3.preview'=>'M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7 M12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6',
 'admin.codes'=>'M3 5h18v5a2 2 0 0 0 0 4v5H3v-5a2 2 0 0 0 0-4z M15 8v8',
 'admin.sessions'=>'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2 M9 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8 M18 4a4 4 0 0 1 0 7 M22 21v-2a4 4 0 0 0-3-4',
-'admin.reports'=>'M4 3v18h17 M8 16v-5 M13 16V7 M18 16V4',
 'admin.audit'=>'M4 4h16v17H4z M8 3h8v4H8z M8 11h8 M8 15h6',
 ])
 <svg {{ $attributes->class(['admin-nav-icon']) }} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{ $paths[$name] ?? $paths['admin.contents'] }}"/></svg>

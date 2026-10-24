@@ -37,7 +37,7 @@ class MalayInterfaceTest extends TestCase
         $this->actingAs($student,'learner');
         foreach (['/profil-sesi','/kuiz-aktiviti','/pasport-pencapaian','/profil-sesi?tutorial=1','/notifikasi','/bantuan'] as $url) $this->assertMalayPage($url);
         $this->actingAs(User::factory()->create(['role'=>'admin','display_name'=>'Pentadbir Bahasa','username'=>'pentadbir-bahasa']),'web');
-        foreach (['/admin','/admin/kandungan','/admin/nota','/admin/kuiz','/admin/soalan','/admin/arahan','/admin/audio','/admin/media','/admin/pengguna','/admin/laporan','/admin/audit','/admin/profil','/admin/tetapan'] as $url) $this->assertMalayPage($url);
+        foreach (['/admin','/admin/kandungan','/admin/nota','/admin/kuiz','/admin/soalan','/admin/arahan','/admin/audio','/admin/media','/admin/pengguna','/admin/audit','/admin/profil','/admin/tetapan'] as $url) $this->assertMalayPage($url);
     }
 
     public function test_validation_and_pagination_do_not_fall_back_to_english(): void

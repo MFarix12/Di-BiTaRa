@@ -43,7 +43,8 @@ class AccessCodeController extends Controller
         $sessions=$report->query($filters)->paginate(20)->withQueryString();
         $rows=$report->rows($sessions->items(),$at,($sessions->currentPage()-1)*$sessions->perPage());
         $codes=DB::table('access_codes')->orderBy('code')->get(['id','code','name']);
-        return view('admin.session-results',compact('sessions','rows','filters','codes'));
+        $certificates=app(\App\Services\SessionCertificates::class)->forSessions(collect($sessions->items())->pluck('id')->all());
+        return view('admin.session-results',compact('sessions','rows','filters','codes','certificates'));
     }
 
     public function export(Request $r, string $format, \App\Services\SessionResults $report)

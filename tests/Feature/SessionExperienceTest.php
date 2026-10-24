@@ -35,6 +35,7 @@ class SessionExperienceTest extends TestCase {
  }
  public function test_certificate_includes_year_class_duration_and_completion(): void {
   $pdf=app(CertificatePdf::class)->generate('Aina','DBR-1','23/10/2026',['year'=>5,'class'=>'5 Gemilang','seconds'=>790]);
-  foreach(['Tahun 5','5 Gemilang','00:13:10','Tamat 5 Zon','Aina'] as $text)$this->assertStringContainsString($text,$pdf);
+  foreach(['Tahun 5','5 Gemilang','pengembaraan pembelajaran Di-BITaRa.','Aina'] as $text)$this->assertStringContainsString($text,$pdf);
+  foreach(['Status:','Masa Keseluruhan:','00:13:10'] as $text)$this->assertStringNotContainsString($text,$pdf);
  }
 }

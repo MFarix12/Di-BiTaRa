@@ -4,7 +4,12 @@
     <h1>Hebat! Zon {{ $zone['sequence'] }} Selesai!</h1>
     @if($p->best_score)<p>★ {{ $p->best_score }} markah</p>@endif
     <p>Cap pasport diperoleh!</p>
-    <div class="transition-plane" aria-hidden="true"><x-plane/></div>
-    <a class="btn btn-primary" href="{{ route('student.zone.launch',$zone['sequence']+1) }}">Teruskan ke Zon {{ $zone['sequence']+1 }} ✈</a>
+    <div class="departure-scene" aria-hidden="true">
+        <span class="departure-cloud cloud-one"></span><span class="departure-cloud cloud-two"></span>
+        <span class="departure-spark spark-one">✦</span><span class="departure-spark spark-two">✧</span>
+        <div class="departure-aircraft"><span class="departure-trail"></span><x-transition-aircraft/></div>
+    </div>
+    <p class="departure-status" role="status">Bersedia! Kita terbang ke Zon {{ $zone['sequence']+1 }}…</p>
+    <noscript><p>Aktifkan JavaScript untuk meneruskan pengembaraan secara automatik.</p></noscript>
 </section>
 </x-layout>

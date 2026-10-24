@@ -160,12 +160,7 @@ document.querySelectorAll('[data-dictation-player]').forEach(player=>{
     stop.addEventListener('click',()=>{audio.pause();status.textContent='Audio dihentikan.';});
 });
 
-// Short decorative transition. The continuous clock is never reset here.
-document.querySelectorAll('a[href*="/zon/"][href$="/mula"]').forEach(link=>link.addEventListener('click',event=>{
-    if(event.ctrlKey||event.metaKey||event.shiftKey||event.altKey||event.button!==0||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-    event.preventDefault();const plane=document.createElement('div');plane.className='zone-flight-transition';plane.textContent='✈';plane.setAttribute('aria-hidden','true');document.body.append(plane);setTimeout(()=>location.assign(link.href),650);
-}));
-
+// Zone links navigate directly; no diagonal aircraft overlay.
 const arrival=document.querySelector('[data-arrival-briefing]');
 if(arrival){arrival.close();arrival.showModal();arrival.addEventListener('cancel',event=>event.preventDefault());}
 
@@ -232,6 +227,15 @@ document.querySelectorAll('[data-draft-url]').forEach(form=>{
 });
 
 const journeyTransition=document.querySelector('[data-adventure-transition]');
-if(journeyTransition&&!matchMedia('(prefers-reduced-motion: reduce)').matches){setTimeout(()=>{const plane=document.createElement('div');plane.className='zone-flight-transition';plane.textContent='✈';plane.setAttribute('aria-hidden','true');document.body.append(plane);},1100);setTimeout(()=>location.assign(journeyTransition.dataset.next),1900);}
+if(journeyTransition){
+    const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let departed=false;
+    const depart=()=>{if(departed)return;departed=true;location.replace(journeyTransition.dataset.next);};
+    journeyTransition.querySelector('.departure-aircraft')?.addEventListener('animationend',event=>{
+        if(event.animationName==='zone-takeoff')depart();
+    });
+    // Also advance with reduced motion or if animations are disabled in preferences.
+    setTimeout(depart,reducedMotion?1800:3800);
+}
 // Recheck the current journey after a browser Back restoration.
 window.addEventListener('pageshow',event=>{if(event.persisted&&document.body.classList.contains('student-top-layout'))location.reload();});

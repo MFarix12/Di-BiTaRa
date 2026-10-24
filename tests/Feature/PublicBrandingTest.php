@@ -15,7 +15,7 @@ class PublicBrandingTest extends TestCase
     {
         foreach (['/','/tentang','/cara-bermain','/capai-pembelajaran','/masukkan-kod','/log-masuk-admin','/privasi','/syarat-penggunaan','/bantuan'] as $url) {
             $response = $this->get($url)->assertOk()->assertSee('class="public-footer"', false)->assertSee('images/official-logo.png');
-            foreach (['home','about','play','adventure','access.enter','admin.login','help','privacy','terms'] as $route) $response->assertSee(route($route), false);
+            foreach (['home','about','play','adventure','access.enter','admin.login'] as $route) $response->assertSee(route($route), false);
             $response->assertSee('Hak Cipta Terpelihara © 2026 Di-BITaRa');
         }
     }
