@@ -26,7 +26,7 @@ class AvatarCatalogueTest extends TestCase
         DB::table('avatars')->where('id',$captain->id)->update(['media_file_id'=>$otherMedia]);
         $catalogue->install($admin->id);
         $this->assertSame($before,DB::table('avatars')->pluck('id','code')->all());
-        $this->assertDatabaseCount('avatars',15);
+        $this->assertDatabaseCount('avatars',16);
         $this->assertNotEquals($otherMedia,DB::table('avatars')->where('id',$captain->id)->value('media_file_id'));
         $this->assertSame(AvatarCatalogue::image('pilot-1'),AvatarCatalogue::image('unknown-avatar'));
         $this->assertStringNotContainsString('pilot-avatars.png',$this->blade('<x-pilot-avatar code="pilot-1"/>')->__toString());
@@ -38,7 +38,7 @@ class AvatarCatalogueTest extends TestCase
             $hashes[] = hash_file('sha256',$file);
             $this->assertSame(IMAGETYPE_PNG,getimagesize($file)[2]);
         }
-        $this->assertCount(15,array_unique($hashes));
+        $this->assertCount(16,array_unique($hashes));
     }
 
 }

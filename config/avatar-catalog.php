@@ -16,4 +16,5 @@ return [
     'saintis-arif' => ['name'=>'Saintis Arif','gender'=>'male','role'=>'Saintis Angkasa'],
     'navigator-luna' => ['name'=>'Navigator Luna','gender'=>'female','role'=>'Navigator'],
     'operasi-faris' => ['name'=>'Pegawai Faris','gender'=>'male','role'=>'Pegawai Operasi Lapangan Terbang'],
+    'pegawai-cuaca' => ['name'=>'Pegawai Cuaca Penerbangan','gender'=>'female','role'=>'Pegawai Cuaca Penerbangan'],
 ];

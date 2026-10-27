@@ -80,10 +80,10 @@ class PassportAchievementsTest extends TestCase
     public function test_level_is_fixed_to_session_year_without_any_progress(): void
     {
         $this->seed();
-        foreach([4,5,6] as $year){
+        foreach([4] as $year){
             $s=$this->makeLearner(['school_year'=>$year]);
             $this->assertSame($year,app(PassportOverview::class)->for($s)['level']);
-            $this->actingAs($s,'learner')->get('/pasport-pencapaian')->assertOk()->assertSee('Tahap mengikut tahun')->assertDontSee('Tahap meningkat');
+            $this->actingAs($s,'learner')->get('/pasport-pencapaian')->assertOk()->assertSee('Tahap 4')->assertDontSee('Tahap meningkat');
         }
     }
 }

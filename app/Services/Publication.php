@@ -19,10 +19,10 @@ class Publication
             'questions' => DB::table('questions')->where('activity_id', $a->id)->where('status', 'published')->whereNull('deleted_at')->orderBy('sort_order')->orderBy('id')->get()->map(fn ($q) => app(QuestionBank::class)->snapshot($q))->all()];
     }
 
-    public function publish(int $admin, int $year = 4): int
+    public function publish(int $admin): int
     {
-        return DB::transaction(function () use ($admin, $year) {
-            abort_unless(in_array($year,[4,5,6],true),422);
+        return DB::transaction(function () use ($admin) {
+            $year=4;
             $manifest = ['school_year'=>$year,'zones' => []];
             $bank = app(QuestionBank::class);
             foreach (DB::table('zones')->orderBy('sequence')->get() as $zone) {

@@ -100,7 +100,7 @@ class AccessSessionTest extends TestCase
             foreach($zone['activities'] as $activity){
                 $this->get(route('student.zone.launch',$sequence))->assertOk();
                 $launch=$this->post(route('student.zone.prepare',$sequence),['target'=>$activity['id']]);
-                if($sequence<5){$launch->assertOk();$this->travel(3)->seconds();$launch=$this->post(route('student.zone.start',$sequence),['target'=>$activity['id']]);}
+                if($sequence<=5){$launch->assertOk();$this->travel(3)->seconds();$launch=$this->post(route('student.zone.start',$sequence),['target'=>$activity['id']]);}
                 $launch->assertRedirect();$attempt=(int)basename($launch->headers->get('Location'));
                 $this->assertDatabaseCount('journey_clocks',1);$stamp=DB::table('journey_clocks')->value('started_at');$start??=$stamp;$this->assertSame($start,$stamp);
                 foreach(DB::table('attempt_questions')->where('attempt_id',$attempt)->orderBy('position')->get() as $q){

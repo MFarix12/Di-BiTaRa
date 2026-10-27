@@ -3,7 +3,7 @@
 <label>Kod Pengembaraan<select name="code"><option value="">Semua kod</option>@foreach($codes as $code)<option value="{{ $code->id }}" @selected(($filters['code']??'')==$code->id)>{{ $code->code }} · {{ $code->name }}</option>@endforeach</select></label>
 <label>Nama Pelajar<input name="name" value="{{ $filters['name']??'' }}" maxlength="100" placeholder="Cari nama"></label>
 <label>Kelas<input name="class" value="{{ $filters['class']??'' }}" maxlength="50" placeholder="Semua kelas"></label>
-<label>Tahun / Darjah<select name="year"><option value="">Semua tahun</option>@foreach([4,5,6] as $year)<option value="{{ $year }}" @selected(($filters['year']??'')==$year)>Tahun {{ $year }}</option>@endforeach</select></label>
+
 <label>Status<select name="status"><option value="">Semua status</option>@foreach(['active'=>'Dalam Perjalanan','completed'=>'Selesai','ended'=>'Ditamatkan Awal'] as $value=>$label)<option value="{{ $value }}" @selected(($filters['status']??'')===$value)>{{ $label }}</option>@endforeach</select></label>
 <label>Tarikh Mula — Dari<input type="date" name="from" value="{{ $filters['from']??'' }}"></label><label>Tarikh Mula — Hingga<input type="date" name="to" value="{{ $filters['to']??'' }}"></label>
 <div class="session-filter-actions"><button class="btn btn-primary">Tapis Keputusan</button><a class="btn btn-outline" href="{{ route('admin.sessions') }}">Kosongkan Filter</a></div>

@@ -40,7 +40,7 @@ class FoundationTest extends TestCase
         }
         $this->assertCount(36, array_filter(\Illuminate\Support\Facades\Schema::getTableListing(), fn ($name) => !in_array(last(explode('.', $name)),['migrations','sqlite_sequence'])));
         $this->assertDatabaseCount('zones',5);
-        $this->assertDatabaseCount('avatars',15);
+        $this->assertDatabaseCount('avatars',16);
     }
 
     public function test_admin_can_crud_drafts_with_audit_and_safe_preview(): void

@@ -15,7 +15,7 @@ class CertificatePdf
         $lines=[['SIJIL PENCAPAIAN',28,390],['Bijak Imbuhan & Tatabahasa Ruang Angkasa',10,365],['Dengan sukacitanya dianugerahkan kepada',12,336],[$name,28,297],['atas kejayaan melengkapkan lima zon pembelajaran',13,261],['dan aktiviti Imlak dalam pengembaraan Di-BITaRa.',13,240],['Tahniah, juruterbang bahasa!',12,212],['Tarikh: '.$date.'   |   No. Sijil: '.$number,10,183],['Disahkan oleh Sistem Di-BITaRa',9,164]];
         if($details){
             $stream.="% /DiBITaRaSessionV3\n";
-            $lines=[['SIJIL PENCAPAIAN',27,390],['Bijak Imbuhan & Tatabahasa Ruang Angkasa',10,365],['Dianugerahkan kepada',12,340],[$name,26,309],['Tahun '.($details['year']??4).'  |  Kelas: '.($details['class']?:'—'),12,280],['atas kejayaan menyelesaikan keseluruhan',12,252],['pengembaraan pembelajaran Di-BITaRa.',12,232],['Tarikh: '.$date.'   |   No. Sijil: '.$number,10,204],['Disahkan oleh Sistem Di-BITaRa',9,180],['Tahniah, juruterbang bahasa!',10,161]];
+            $lines=[['SIJIL PENCAPAIAN',27,390],['Bijak Imbuhan & Tatabahasa Ruang Angkasa',10,365],['Dianugerahkan kepada',12,340],[$name,26,309],['Tahun 4  |  Kelas: '.($details['class']?:'—'),12,280],['atas kejayaan menyelesaikan keseluruhan',12,252],['pengembaraan pembelajaran Di-BITaRa.',12,232],['Tarikh: '.$date.'   |   No. Sijil: '.$number,10,204],['Disahkan oleh Sistem Di-BITaRa',9,180],['Tahniah, juruterbang bahasa!',10,161]];
         }
         foreach($lines as [$text,$size,$y]){
             $text=iconv('UTF-8','Windows-1252//TRANSLIT',$text);

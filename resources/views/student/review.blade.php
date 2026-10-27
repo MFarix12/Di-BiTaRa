@@ -1,7 +1,7 @@
 <x-layout title="Ulang Kaji">
 <section class="review-page revision-room">
 <header class="revision-welcome">
-<div class="revision-welcome-copy"><span class="revision-eyebrow">✦ RUANG ILMU ANDA · TAHUN {{ auth()->user()->school_year ?? 4 }}</span><h1>Ulang Kaji</h1><p>Jom ulang kaji apa yang telah anda pelajari!</p><div class="revision-welcome-chips"><span>📚 Baca</span><span>🎧 Dengar</span><span>🎮 Cuba lagi</span></div><small>Markah, cap dan masa asal anda kekal.</small></div>
+<div class="revision-welcome-copy"><span class="revision-eyebrow">✦ RUANG ILMU ANDA · TAHUN 4</span><h1>Ulang Kaji</h1><p>Jom ulang kaji apa yang telah anda pelajari!</p><div class="revision-welcome-chips"><span>📚 Baca</span><span>🎧 Dengar</span><span>🎮 Cuba lagi</span></div><small>Markah, cap dan masa asal anda kekal.</small></div>
 <div class="revision-guide"><span class="revision-guide-bubble">Pilih satu misi. Jom belajar bersama!</span><img src="{{ asset('images/avatars/navigator-luna.png') }}" alt="Navigator membawa buku panduan" width="200" height="300"><span class="revision-guide-star" aria-hidden="true">✦</span></div>
 </header>
 <div class="revision-heading"><div><span class="revision-eyebrow">PILIH SUDUT BELAJAR</span><h2>Nak ulang kaji apa hari ini?</h2></div><a class="btn btn-outline" href="{{ route('student.achievements') }}">🏅 Pasport & Pencapaian</a></div>

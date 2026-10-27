@@ -74,7 +74,8 @@ class StudioController extends Controller
                 $data['is_required'] = (int) DB::table('zones')->where('id', $data['zone_id'])->value('sequence') === 1 ? false : $r->boolean('is_required');
             }
             if ($module === 'activities') {
-                $data += $r->validate(['school_year'=>'required|integer|in:4,5,6','kind' => 'required|in:quiz,activity', 'passing_percent' => 'required|numeric|between:1,100']);
+                $data['school_year']=4;
+                $data += $r->validate(['school_year'=>'sometimes|integer|in:4','kind' => 'required|in:quiz,activity', 'passing_percent' => 'required|numeric|between:1,100']);
                 $sequence = (int) DB::table('zones')->where('id', $data['zone_id'])->value('sequence');
                 if (in_array($sequence, [1, 2], true)) {
                     throw ValidationException::withMessages(['zone_id' => 'Zon 1 hanya persediaan profil/avatar. Zon 2 menggunakan nota dan audio sahaja.']);
@@ -235,8 +236,8 @@ class StudioController extends Controller
 
     public function publish(Request $r, Publication $publication)
     {
-        $data=$r->validate(['school_year'=>'required|integer|in:4,5,6']);
-        $publication->publish($r->user()->id,(int)$data['school_year']);
+        $data=$r->validate(['school_year'=>'sometimes|integer|in:4']);
+        $publication->publish($r->user()->id);
 
         return back()->with('status', 'Keluaran baharu diterbitkan. Perjalanan sedia ada mengekalkan versi masing-masing.');
     }

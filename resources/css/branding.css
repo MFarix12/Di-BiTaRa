@@ -433,7 +433,13 @@ body.modern-ui.home-page .launch-scene {
 @media(max-width:600px){.adventure-transition .departure-scene{height:165px;margin-left:-16px;margin-right:-16px}.departure-aircraft{width:260px;left:calc(50% - 130px)}.adventure-transition .departure-status{font-size:.9rem}}
 @media(prefers-reduced-motion:reduce){.departure-aircraft,.departure-cloud,.departure-spark{animation:none}.departure-trail,.departure-spark{display:none}}
 /* One dedicated achievement scene; the header shares it without a repeated image. */
-body.modern-ui.achievements-page{background:#08306c url('/images/passport-achievements-background.webp') center center/cover no-repeat fixed;min-height:100svh}
+body.modern-ui.achievements-page{background:#08306c url('/images/passport-achievements-background-v2.webp') center center/cover no-repeat fixed;min-height:100svh}
 body.achievements-page .student-main{background:transparent}
 body.achievements-page .passport-achievements .pa-hero.pa-hero-framed{background:linear-gradient(100deg,#032359b3,#063d7840);box-shadow:0 6px 18px #00173740,0 0 14px #7bdcff38}
 body.achievements-page .passport-achievements .pa-panel{background:#fafdff;border-color:#a8dbff;box-shadow:0 5px 18px #001b4e30}
+/* Sharpened profile scene, scoped to the learner profile only. */
+body.modern-ui.learner-profile-page{background:#073572 url('/images/learner-profile-background-hd.webp') center center/cover no-repeat fixed;min-height:100svh}
+
+/* Official administrator character on the login welcome panel. */
+body.admin-access-page .auth-intro .auth-logo{content:normal;width:230px;height:310px;object-fit:contain;object-position:center bottom}
+

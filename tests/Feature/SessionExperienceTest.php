@@ -34,8 +34,8 @@ class SessionExperienceTest extends TestCase {
   $this->actingAs(User::where('role','admin')->first(),'web')->get('/admin')->assertOk()->assertSee('Purata Markah')->assertSee('Sesi Selesai');
  }
  public function test_certificate_includes_year_class_duration_and_completion(): void {
-  $pdf=app(CertificatePdf::class)->generate('Aina','DBR-1','23/10/2026',['year'=>5,'class'=>'5 Gemilang','seconds'=>790]);
-  foreach(['Tahun 5','5 Gemilang','pengembaraan pembelajaran Di-BITaRa.','Aina'] as $text)$this->assertStringContainsString($text,$pdf);
+  $pdf=app(CertificatePdf::class)->generate('Aina','DBR-1','23/10/2026',['year'=>4,'class'=>'4 Gemilang','seconds'=>790]);
+  foreach(['Tahun 4','4 Gemilang','pengembaraan pembelajaran Di-BITaRa.','Aina'] as $text)$this->assertStringContainsString($text,$pdf);
   foreach(['Status:','Masa Keseluruhan:','00:13:10'] as $text)$this->assertStringNotContainsString($text,$pdf);
  }
 }

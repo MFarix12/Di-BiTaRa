@@ -16,7 +16,7 @@ class LearningEngine
                 $session=DB::table('learner_sessions')->where('id',$user->id)->lockForUpdate()->first();
                 $existing=LearnerIdentity::journeys($user)->first();
                 if ($existing) { return $existing; }
-                $release=DB::table('learning_releases')->where('status','published')->where('school_year',$session->school_year)->when($session->learning_release_id,fn($q)=>$q->where('id',$session->learning_release_id))->latest('id')->first();
+                $release=DB::table('learning_releases')->where('status','published')->where('school_year',4)->when($session->learning_release_id,fn($q)=>$q->where('id',$session->learning_release_id))->latest('id')->first();
                 if (!$release) { return null; }
                 $id=DB::table('student_journeys')->insertGetId(['learner_session_id'=>$user->id,'learning_release_id'=>$release->id,'flow_version'=>3]);
                 $journey=DB::table('student_journeys')->find($id);$this->refresh($journey);return $journey;
@@ -293,7 +293,7 @@ class LearningEngine
         $number = 'DBR-'.str_pad($journey->id, 8, '0', STR_PAD_LEFT);
         $recipient = $existing?->recipient_name ?? $user->display_name;
         try {
-            $pdf = app(CertificatePdf::class)->generate($recipient, $number, \Carbon\Carbon::parse($journey->completed_at ?? now())->timezone('Asia/Kuala_Lumpur')->format('d/m/Y'), ['year'=>$user->school_year??4,'class'=>$user->class_name??'','seconds'=>$journey->total_duration_seconds??0]);
+            $pdf = app(CertificatePdf::class)->generate($recipient, $number, \Carbon\Carbon::parse($journey->completed_at ?? now())->timezone('Asia/Kuala_Lumpur')->format('d/m/Y'), ['year'=>4,'class'=>$user->class_name??'','seconds'=>$journey->total_duration_seconds??0]);
             $path = 'certificates/'.$number.'.pdf';
             if (! Storage::disk('private')->put($path, $pdf)) {
                 throw new \RuntimeException('PDF storage failed.');

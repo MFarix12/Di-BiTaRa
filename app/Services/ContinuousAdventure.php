@@ -48,7 +48,7 @@ class ContinuousAdventure
             abort_unless(($this->pending($journey,$zone)['id'] ?? null) === $activityId,403);
             $launch=DB::table('challenge_launches')->where('student_journey_id',$journey->id)->where('activity_id',$activityId)->first();
             if ($launch?->started_at) { return; }
-            if (in_array($zone['sequence'],[3,4],true) && (!$launch?->countdown_started_at || Carbon::parse($launch->countdown_started_at)->addSeconds(3)->isFuture())) {
+            if (in_array($zone['sequence'],[3,4,5],true) && (!$launch?->countdown_started_at || Carbon::parse($launch->countdown_started_at)->addSeconds(3)->isFuture())) {
                 throw ValidationException::withMessages(['countdown'=>'Tunggu kira detik tamat.']);
             }
             DB::table('challenge_launches')->updateOrInsert(['student_journey_id'=>$journey->id,'activity_id'=>$activityId],['started_at'=>now()->format('Y-m-d H:i:s.v')]);

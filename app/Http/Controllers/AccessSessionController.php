@@ -37,11 +37,11 @@ class AccessSessionController extends Controller
         [$session,$token]=DB::transaction(function () use ($code,$engine) {
             $fresh=DB::table('access_codes')->where('id',$code->id)->lockForUpdate()->first();
             abort_unless($fresh->status==='active' && (!$fresh->expires_at || now()->lt($fresh->expires_at)),422,'Kod tidak lagi tersedia.');
-            $release=DB::table('learning_releases')->where('school_year',$fresh->school_year)->where('status','published')->when($fresh->learning_release_id,fn($q)=>$q->where('id',$fresh->learning_release_id))->latest('id')->first();
+            $release=DB::table('learning_releases')->where('school_year',4)->where('status','published')->when($fresh->learning_release_id,fn($q)=>$q->where('id',$fresh->learning_release_id))->latest('id')->first();
             if(!$release) throw ValidationException::withMessages(['code'=>'Set soalan tahun ini belum tersedia. Sila hubungi guru.']);
             if(!$fresh->learning_release_id) { DB::table('access_codes')->where('id',$fresh->id)->update(['learning_release_id'=>$release->id]);$fresh->learning_release_id=$release->id; }
             $token=bin2hex(random_bytes(32));
-            $s=LearnerSession::create(['access_code_id'=>$fresh->id,'school_year'=>$fresh->school_year,'learning_release_id'=>$fresh->learning_release_id,'public_id'=>(string)Str::uuid(),'token_hash'=>hash('sha256',$token)]);
+            $s=LearnerSession::create(['access_code_id'=>$fresh->id,'school_year'=>4,'learning_release_id'=>$fresh->learning_release_id,'public_id'=>(string)Str::uuid(),'token_hash'=>hash('sha256',$token)]);
             $engine->journey($s);return [$s,$token];
         });
         $r->session()->regenerate();$r->session()->put('learner_token',$token);

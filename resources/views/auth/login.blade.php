@@ -1,6 +1,6 @@
 <x-layout title="Log Masuk Pentadbir">
 <section class="auth-scene star-field">
-<div class="auth-intro"><span class="pill">PANEL PENTADBIR Di-BITaRa</span><h1>Selamat datang ke Pusat Kawalan Pentadbir.</h1><p>Urus kandungan, kod akses dan sesi pembelajaran.</p><x-brand-logo class="auth-logo"/></div>
+<div class="auth-intro"><span class="pill">PANEL PENTADBIR Di-BITaRa</span><h1>Selamat datang ke Pusat Kawalan Pentadbir.</h1><p>Urus kandungan, kod akses dan sesi pembelajaran.</p><x-admin-avatar class="auth-logo"/></div>
 <section class="form-card admin-login-card" aria-labelledby="admin-login-title">
 <header class="admin-login-heading"><span class="admin-login-emblem" aria-hidden="true"><x-public-nav-icon name="admin"/></span><div><span class="eyebrow">AKSES KHAS PENTADBIR</span><h2 id="admin-login-title">Log Masuk Pentadbir</h2></div></header>
 <x-feedback/>

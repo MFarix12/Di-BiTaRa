@@ -17,16 +17,17 @@ class AccessCodeController extends Controller
 
     public function save(Request $r, ?int $code=null)
     {
-        $data=$r->validate(['name'=>'required|string|max:100','status'=>'required|in:active,inactive','expires_at'=>'nullable|date','school_year'=>($code?'sometimes':'required').'|integer|in:4,5,6']);
+        $data=$r->validate(['name'=>'required|string|max:100','status'=>'required|in:active,inactive','expires_at'=>'nullable|date','school_year'=>'sometimes|integer|in:4']);
+        $data['school_year']=4;
         $data['expires_at']=($data['expires_at'] ?? null) ? \Carbon\Carbon::parse($data['expires_at'],'Asia/Kuala_Lumpur')->utc()->format('Y-m-d H:i:s') : null;
         DB::transaction(function () use ($r,$code,$data) {
             if ($code) {
                 $existing=DB::table('access_codes')->where('id',$code)->lockForUpdate()->first();
                 abort_unless($existing,404);
-                if(isset($data['school_year']) && (int)$data['school_year']!==(int)$existing->school_year) throw \Illuminate\Validation\ValidationException::withMessages(['school_year'=>'Tahun kod tidak boleh ditukar. Cipta kod baharu untuk tahun lain.']);
+                if(isset($data['school_year']) && (int)$data['school_year']!==(int)$existing->school_year) throw \Illuminate\Validation\ValidationException::withMessages(['school_year'=>'Tahun kod tidak boleh ditukar. Sistem ini khusus untuk Tahun 4.']);
                 abort_unless(DB::table('access_codes')->where('id',$code)->exists(),404);DB::table('access_codes')->where('id',$code)->update($data+['updated_at'=>now()]); }
             else {
-                $release=DB::table('learning_releases')->where('school_year',$data['school_year'])->where('status','published')->latest('id')->first();
+                $release=DB::table('learning_releases')->where('school_year',4)->where('status','published')->latest('id')->first();
                 if(!$release) throw \Illuminate\Validation\ValidationException::withMessages(['school_year'=>'Set soalan tahun ini belum diterbitkan.']);
                 $data['learning_release_id']=$release->id;
                 do { $generated='DBR-T'.$data['school_year'].'-'.Str::upper(Str::random(6)); } while(DB::table('access_codes')->where('code',$generated)->exists());

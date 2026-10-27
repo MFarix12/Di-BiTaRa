@@ -61,10 +61,6 @@ class AdventureController extends LearningController
         $data=$r->validate(['target'=>'nullable|integer','input_mode'=>'nullable|in:pointer,keyboard']);
         abort_if(isset($data['target']) && (int)$data['target']!==$pending['id'],403);
         $r->session()->forget('zone_input_mode');
-        if ($sequence===5) {
-            $flow->start($j,$zone,$pending['id']);
-            return redirect()->route('student.attempt',$engine->begin($r->user(),$pending['id']));
-        }
         $flow->prepare($j,$zone,$pending['id']);
         if ($flow->ready($j,$pending['id'])) { return redirect()->route('student.activities',['zon'=>$sequence]); }
         $target=['next'=>'activity','target'=>$pending['id']];

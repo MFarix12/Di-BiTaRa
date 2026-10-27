@@ -58,14 +58,6 @@ Artisan::command('dibitara:install-avatars', function () {
     $this->info('Koleksi avatar sedia. Pilihan avatar lama dikekalkan.');
 })->purpose('Pasang koleksi avatar penerbangan dan ruang angkasa');
 
-Artisan::command('dibitara:install-year-sets', function () {
-    $admin=User::where('role','admin')->where('status','active')->firstOrFail();
-    foreach([5,6] as $year){
-        $id=app(\App\Services\YearCurriculum::class)->install($admin->id,$year);
-        $this->info('Tahun '.$year.' sedia. Keluaran #'.$id);
-    }
-})->purpose('Pasang set PDF Tahun 5 dan Tahun 6 tanpa menukar sesi atau set Tahun 4');
-
 Artisan::command('dibitara:personalize-certificates',function(){
  $n=0;
  foreach(DB::table('certificates')->where('status','ready')->whereNotNull('media_file_id')->get() as $cert){

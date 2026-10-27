@@ -14,7 +14,7 @@ class SessionResults
         return array_filter($r->validate([
             'code'=>'nullable|integer|exists:access_codes,id','name'=>'nullable|string|max:100',
             'class'=>'nullable|string|max:50','from'=>'nullable|date_format:Y-m-d','to'=>array_filter(['nullable','date_format:Y-m-d',$r->filled('from')?'after_or_equal:from':null]),
-            'status'=>'nullable|in:completed,ended,active','year'=>'nullable|integer|in:4,5,6',
+            'status'=>'nullable|in:completed,ended,active',
         ]),fn($v)=>$v!==null && $v!=='');
     }
 
@@ -25,7 +25,6 @@ class SessionResults
             ->leftJoin('student_journeys as j','j.learner_session_id','=','s.id')
             ->leftJoin('journey_clocks as clock','clock.student_journey_id','=','j.id')
             ->select('s.*','c.code','c.name as code_name','av.role_label as avatar_role','j.id as journey_id','j.flow_version','clock.elapsed_ms','clock.started_at as clock_started_at','clock.finished_at as clock_finished_at');
-        if(isset($filters['year']))$q->where('s.school_year',$filters['year']);
         if(isset($filters['code']))$q->where('c.id',$filters['code']);
         // instr performs a literal substring match: user %/_ characters never act as SQL wildcards.
         foreach(['name'=>'display_name','class'=>'class_name'] as $key=>$column){
@@ -56,7 +55,7 @@ class SessionResults
             $zones=$p->where('status','completed')->pluck('zone_id');
             $sequences=$zones->map(fn($id)=>$zoneNumbers->get($id))->filter()->sort()->values()->all();
             return [
-                $offset+$i+1,$s->code,strtoupper(substr($s->public_id,0,8)),$s->display_name,$s->class_name?:'—','Tahun '.$s->school_year,$s->avatar_role?:'Belum dipilih',
+                $offset+$i+1,$s->code,strtoupper(substr($s->public_id,0,8)),$s->display_name,$s->class_name?:'—','Tahun 4',$s->avatar_role?:'Belum dipilih',
                 $sequences?'Zon '.implode(', ',$sequences):'Belum ada',(int)$p->sum('best_score'),($m->first_correct??0).' / '.($m->answered??0),
                 $seconds===null?'Belum bermula':sprintf('%02d:%02d:%02d',intdiv($seconds,3600),intdiv($seconds%3600,60),$seconds%60),
                 $s->completed_at?'Selesai':($s->ended_at?'Ditamatkan Awal':'Dalam Perjalanan'),
@@ -67,7 +66,7 @@ class SessionResults
     private function date(?string $value): string {return $value?Carbon::parse($value)->timezone('Asia/Kuala_Lumpur')->format('d/m/Y H:i:s'):'—';}
     public function summary(array $filters): string
     {
-        $labels=['year'=>'Tahun','code'=>'Kod','name'=>'Nama','class'=>'Kelas','from'=>'Dari','to'=>'Hingga','status'=>'Status'];
+        $labels=['code'=>'Kod','name'=>'Nama','class'=>'Kelas','from'=>'Dari','to'=>'Hingga','status'=>'Status'];
         $values=['completed'=>'Selesai','ended'=>'Ditamatkan Awal','active'=>'Dalam Perjalanan'];$parts=[];
         foreach($filters as $key=>$value){if($key==='code')$value=DB::table('access_codes')->where('id',$value)->value('code');$parts[]=$labels[$key].': '.($values[$value]??$value);}
         return $parts?implode(' · ',$parts):'Semua sesi';

@@ -1,5 +1,5 @@
 <x-layout title="Pratonton Sijil" admin>
-<section class="studio-page"><header class="studio-heading"><h1>Sijil Pelajar</h1><p>{{ $certificate->display_name }} · Tahun {{ $certificate->school_year }} · {{ $certificate->class_name }}</p></header>
+<section class="studio-page"><header class="studio-heading"><h1>Sijil Pelajar</h1><p>{{ $certificate->display_name }} · Tahun 4 · {{ $certificate->class_name }}</p></header>
 <div class="studio-panel"><div class="studio-actions"><a class="btn btn-outline" href="{{ route('admin.sessions') }}">Kembali ke Keputusan Sesi</a><a class="btn btn-primary" href="{{ route('admin.certificates.download',$certificate->id) }}">Muat Turun PDF</a></div>
 <p>{{ $certificate->certificate_number }} · Tamat lima zon dan refleksi akhir.</p>
 @if($preview['frame'] && $preview['lines'])

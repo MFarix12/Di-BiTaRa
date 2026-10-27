@@ -46,7 +46,7 @@ class PassportOverview
         }
         return $data + [
             'badges'=>$badges, 'badgeCount'=>$badges->where('earned',true)->count(),
-            'level'=>LearnerIdentity::isSession($user) ? (int) DB::table('learner_sessions')->where('id',$user->id)->value('school_year') : 4,
+            'level'=>4,
             'rank'=>match (true) { $completedZones >= 5=>'Kapten Bahasa', $completedZones >= 3=>'Penjelajah Bahasa', $completedZones >= 1=>'Pelatih Bahasa', default=>'Juruterbang Baharu' },
             'recentAchievements'=>$events->filter(fn ($event) => filled($event['date']))->sortByDesc('date')->take(8)->values(),
             'certificates'=>$certificates,

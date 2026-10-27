@@ -46,7 +46,7 @@ class ContinuousAdventureTest extends TestCase
         $j=$this->journey();$zone=$this->engine->zone($j,$sequence);$pending=app(ContinuousAdventure::class)->pending($j,$zone);
         $this->get(route('student.zone.launch',$sequence))->assertOk()->assertDontSee('Guna Kamera')->assertDontSee('Tanpa Kamera');
         $res=$this->post(route('student.zone.prepare',$sequence),['target'=>$pending['id']]);
-        if ($sequence<5) { $res->assertOk()->assertSee('data-seconds="3"',false);$this->travel(3)->seconds();$res=$this->post(route('student.zone.start',$sequence),['target'=>$pending['id']]); }
+        if ($sequence<=5) { $res->assertOk()->assertSee('data-seconds="3"',false);$this->travel(3)->seconds();$res=$this->post(route('student.zone.start',$sequence),['target'=>$pending['id']]); }
         $res->assertRedirect();
         return (int)basename($res->headers->get('Location'));
     }
@@ -64,6 +64,21 @@ class ContinuousAdventureTest extends TestCase
     {
         $this->openThree();
         for ($z=3;$z<$sequence;$z++) { while(app(ContinuousAdventure::class)->pending($this->journey(),$this->engine->zone($this->journey(),$z))) { $this->finish($this->start($z)); } }
+    }
+
+    public function test_dictation_countdown_is_required_once_before_first_question(): void
+    {
+        $this->reach(5);$j=$this->journey();$zone=$this->engine->zone($j,5);
+        $activity=app(ContinuousAdventure::class)->pending($j,$zone);
+        $this->get(route('student.zone.launch',5))->assertOk()->assertSee('Dengar dan tulis');
+        $this->post(route('student.zone.prepare',5),['target'=>$activity['id']])->assertOk()->assertSee('data-seconds="3"',false);
+        $this->assertFalse(app(ContinuousAdventure::class)->ready($j,$activity['id']));
+        $this->post(route('student.zone.start',5),['target'=>$activity['id']])->assertSessionHasErrors('countdown');
+        $this->travel(3)->seconds();
+        $response=$this->post(route('student.zone.start',5),['target'=>$activity['id']])->assertRedirect();
+        $this->get($response->headers->get('Location'))->assertOk()->assertSee('Dengar audio');
+        $this->assertTrue(app(ContinuousAdventure::class)->ready($j,$activity['id']));
+        $this->get(route('student.zone.launch',5))->assertRedirect();
     }
 
     public function test_meaning_is_a_persistent_server_gate_and_last_ack_completes_challenge_once(): void
